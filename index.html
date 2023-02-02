@@ -97,6 +97,21 @@ c.addEventListener("submit", u);
 c.addEventListener("keyup", t => {
     t.keyCode === 13 && u(t)
 });
+
+const textArea = document.querySelector('textarea[name="prompt"]');
+const boxes = document.querySelectorAll('.box');
+
+textArea.addEventListener('input', function() {
+  boxes.forEach(box => {
+    box.style.display = 'none';
+  });
+});
+
+textArea.addEventListener('focus', function() {
+  boxes.forEach(box => {
+    box.style.display = 'none';
+  });
+});
     </script>
     <style>
        @import"https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap";
