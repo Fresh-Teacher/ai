@@ -348,6 +348,26 @@ form img {
     width: 30px;
     height: 30px
 }
+
+.header {
+  height: 50px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  background-color: #0a4939;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+}
+
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
       </style>
   
     <meta charset="UTF-8" />
@@ -361,6 +381,10 @@ form img {
 </head>
 
 <body>
+    <header class="header">
+        <h1 class="header-title">Fresh Bot</h1>
+      </header>
+      
     <div class="container">
         <div class="box">
           <h3><i class="fas fa-lightbulb"></i> Example  Questions</h3>
