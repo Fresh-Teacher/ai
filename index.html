@@ -1,306 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <script>
-        (function() {
-    const r = document.createElement("link").relList;
-    if (r && r.supports && r.supports("modulepreload")) return;
-    for (const e of document.querySelectorAll('link[rel="modulepreload"]')) s(e);
-    new MutationObserver(e => {
-        for (const n of e)
-            if (n.type === "childList")
-                for (const i of n.addedNodes) i.tagName === "LINK" && i.rel === "modulepreload" && s(i)
-    }).observe(document, {
-        childList: !0,
-        subtree: !0
-    });
-
-    function o(e) {
-        const n = {};
-        return e.integrity && (n.integrity = e.integrity), e.referrerpolicy && (n.referrerPolicy = e.referrerpolicy), e.crossorigin === "use-credentials" ? n.credentials = "include" : e.crossorigin === "anonymous" ? n.credentials = "omit" : n.credentials = "same-origin", n
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-jUhy67B6xltxLs4U6CcaU6ljKgE9BEzIJeoYDPfvKjddb+26UvB6MFA4j+4wMeE4L6hOmJ0zS+m9QO/z0/3qQ==" crossorigin="anonymous" />
+  <style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      width: 80%;
+      margin: 0 auto;
     }
 
-    function s(e) {
-        if (e.ep) return;
-        e.ep = !0;
-        const n = o(e);
-        fetch(e.href, n)
+    .box {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      width: 31%;
+      margin: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-})();
-const f = "/assets/bot-61bdb6bf.svg",
-    m = "/assets/user-bcdeb18e.svg",
-    c = document.querySelector("form"),
-    a = document.querySelector("#chat_container");
-let d;
 
-function p(t) {
-    t.textContent = "", d = setInterval(() => {
-        t.textContent += ".", t.textContent === "...." && (t.textContent = "")
-    }, 300)
-}
+    @media only screen and (max-width: 600px) {
+      .container {
+        width: 100%;
+      }
 
-function g(t, r) {
-    let o = 0,
-        s = setInterval(() => {
-            o < r.length ? (t.innerHTML += r.charAt(o), o++) : clearInterval(s)
-        }, 20)
-}
-
-function h() {
-    const t = Date.now(),
-        o = Math.random().toString(16);
-    return `id-${t}-${o}`
-}
-
-function l(t, r, o, s) {
-    return `
-        <div class="wrapper ${t&&"ai"}">
-            <div class="chat">
-                <div class="profile">
-                    <img 
-                      src=${t?f:m} 
-                      alt="${t?"bot":"user"}" 
-                    />
-                </div>
-                <div class="message ${s}" id=${o}>${r}</div>
-            </div>
-        </div>
-    `
-}
-const u = async t => {
-    t.preventDefault();
-    const r = new FormData(c);
-    a.innerHTML += l(!1, r.get("prompt"), "user"), c.reset();
-    const o = h();
-    a.innerHTML += l(!0, " ", o, "bot"), a.scrollTop = a.scrollHeight;
-    const s = document.getElementById(o);
-    p(s);
-    const e = await fetch("https://ai-icvp83d55-fresh-teacher.vercel.app", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            prompt: r.get("prompt")
-        })
-    });
-    if (clearInterval(d), s.innerHTML = "", e.ok) {
-        const i = (await e.json()).bot.trim();
-        g(s, i)
-    } else {
-        const n = await e.text();
-        s.innerHTML = "Something went wrong", alert(n)
+      .box {
+        width: 100%;
+        margin: 10px 0;
+        border-radius: 0;
+      }
     }
-};
-c.addEventListener("submit", u);
-c.addEventListener("keyup", t => {
-    t.keyCode === 13 && u(t)
-});
-    </script>
-    <style>
-       @import"https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap";
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Alegreya Sans, sans-serif
-}
-
-body {
-    background: azure;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px auto;
-    flex-direction: column;
-    flex-wrap: wrap
-}
-
-.header {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color: inherit;
-    width: 80%;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px
-}
-
-.header p {
-    color: #333;
-    font-family: monospace;
-    font-size: 20px
-}
-
-#app {
-    width: 90%;
-    height: 100vh;
-    background: #fff;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 5px #00000080;
-    -webkit-transition: all .6s cubic-bezier(.165, .84, .44, 1);
-    transition: all .6s cubic-bezier(.165, .84, .44, 1)
-}
-
-#app:hover {
-    opacity: 1;
-    box-shadow: 0 1px 2px #0003;
-    -webkit-transform: scale(.99, .99);
-    transform: scale(.99);
-    cursor: pointer
-}
-
-#chat_container {
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    padding-bottom: 20px;
-    scroll-behavior: smooth
-}
-
-#chat_container::-webkit-scrollbar {
-    display: none
-}
-
-.wrapper {
-    width: 100%;
-    padding: 15px
-}
-
-.ai {
-    background: #40414F
-}
-
-.chat {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 10px
-}
-
-.profile {
-    width: 36px;
-    height: 36px;
-    border-radius: 5px;
-    background: #5436DA;
-    display: flex;
-    justify-content: center;
-    align-items: center
-}
-
-.ai .profile {
-    background: #10a37f
-}
-
-.profile img {
-    width: 60%;
-    height: 60%;
-    object-fit: contain
-}
-
-.message {
-    flex: 1;
-    font-size: 20px;
-    max-width: 100%;
-    overflow-x: scroll;
-    white-space: pre-wrap;
-    -ms-overflow-style: none;
-    scrollbar-width: none
-}
-
-.user {
-    color: #333
-}
-
-.bot {
-    color: #fff
-}
-
-.message::-webkit-scrollbar {
-    display: none
-}
-
-form {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 10px;
-    background: #40414F;
-    display: flex;
-    flex-direction: row;
-    gap: 10px
-}
-
-textarea {
-    width: 100%;
-    color: #fff;
-    font-size: 18px;
-    padding: 10px;
-    background: transparent;
-    border-radius: 5px;
-    border: none;
-    outline: none
-}
-
-button {
-    outline: 0;
-    border: 0;
-    cursor: pointer;
-    background: transparent
-}
-
-form img {
-    width: 30px;
-    height: 30px
-}
-      </style>
-  
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fresh Bot</title>
-
-    <script type="module" crossorigin src="/assets/index-58e96f49.js"></script>
-   
-    <!-- <link rel="stylesheet" href="/assets/index-5599ee81.css"> -->
+  </style>
 </head>
-
 <body>
-    <div class="header">
-        <p>Hi</p>
-        <img src="data:image/png;base64,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"
-            alt="hand">
-        <p>,</p>
-        <p> call me Fresh Bot! I use AI to solve problems so ask me anything in the box below!</p>
+  <div class="container">
+    <div class="box">
+      <h3><i class="fas fa-lightbulb"></i> Examples</h3>
+      <p>What is the capital of France?</p>
+      <p>Who won the Nobel Prize for Literature in 2021?</p>
+      <p>What is the latest smartphone from Apple?</p>
     </div>
-    <div id="app">
-        <div id="chat_container"></div>
-        <form action="">
-            <textarea name="prompt" id="" cols="1" rows="1" placeholder="Ask Fresh Bot..."></textarea>
-            <button type="submit"> <img src="send-f2246764.svg" alt="send"/></button>
-        </form>
+    <div class="box">
+        <h3><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
+        <p>My training data only goes up to 2021, so I may not have information on recent events.</p>
+        <p>I may struggle to understand context and may not provide accurate answers for questions that are too vague or open-ended.</p>
+      </div>
+    <div class="box">
+      <h3><i class="fas fa-cog"></i> Capabilities</h3>
+      <p>I can answer a wide range of questions on various topics such as history, science, current events, and more.</p>
+      <p>I can also generate creative writing and perform arithmetic calculations.</p>
     </div>
-
+  </div>
 </body>
-
-<footer>
-   <center> Copyright Fresh Teacher Software 2023 <br>All Rights Reserved</center>
-  </footer>
-  
-
 </html>
