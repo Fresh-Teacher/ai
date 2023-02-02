@@ -1,9 +1,273 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-jUhy67B6xltxLs4U6CcaU6ljKgE9BEzIJeoYDPfvKjddb+26UvB6MFA4j+4wMeE4L6hOmJ0zS+m9QO/z0/3qQ==" crossorigin="anonymous" />
-  <style>
-    .container {
+    <script>
+        (function() {
+    const r = document.createElement("link").relList;
+    if (r && r.supports && r.supports("modulepreload")) return;
+    for (const e of document.querySelectorAll('link[rel="modulepreload"]')) s(e);
+    new MutationObserver(e => {
+        for (const n of e)
+            if (n.type === "childList")
+                for (const i of n.addedNodes) i.tagName === "LINK" && i.rel === "modulepreload" && s(i)
+    }).observe(document, {
+        childList: !0,
+        subtree: !0
+    });
+
+    function o(e) {
+        const n = {};
+        return e.integrity && (n.integrity = e.integrity), e.referrerpolicy && (n.referrerPolicy = e.referrerpolicy), e.crossorigin === "use-credentials" ? n.credentials = "include" : e.crossorigin === "anonymous" ? n.credentials = "omit" : n.credentials = "same-origin", n
+    }
+
+    function s(e) {
+        if (e.ep) return;
+        e.ep = !0;
+        const n = o(e);
+        fetch(e.href, n)
+    }
+})();
+const f = "/assets/bot-61bdb6bf.svg",
+    m = "/assets/user-bcdeb18e.svg",
+    c = document.querySelector("form"),
+    a = document.querySelector("#chat_container");
+let d;
+
+function p(t) {
+    t.textContent = "", d = setInterval(() => {
+        t.textContent += ".", t.textContent === "...." && (t.textContent = "")
+    }, 300)
+}
+
+function g(t, r) {
+    let o = 0,
+        s = setInterval(() => {
+            o < r.length ? (t.innerHTML += r.charAt(o), o++) : clearInterval(s)
+        }, 20)
+}
+
+function h() {
+    const t = Date.now(),
+        o = Math.random().toString(16);
+    return `id-${t}-${o}`
+}
+
+function l(t, r, o, s) {
+    return `
+        <div class="wrapper ${t&&"ai"}">
+            <div class="chat">
+                <div class="profile">
+                    <img 
+                      src=${t?f:m} 
+                      alt="${t?"bot":"user"}" 
+                    />
+                </div>
+                <div class="message ${s}" id=${o}>${r}</div>
+            </div>
+        </div>
+    `
+}
+const u = async t => {
+    t.preventDefault();
+    const r = new FormData(c);
+    a.innerHTML += l(!1, r.get("prompt"), "user"), c.reset();
+    const o = h();
+    a.innerHTML += l(!0, " ", o, "bot"), a.scrollTop = a.scrollHeight;
+    const s = document.getElementById(o);
+    p(s);
+    const e = await fetch("https://ai-icvp83d55-fresh-teacher.vercel.app", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            prompt: r.get("prompt")
+        })
+    });
+    if (clearInterval(d), s.innerHTML = "", e.ok) {
+        const i = (await e.json()).bot.trim();
+        g(s, i)
+    } else {
+        const n = await e.text();
+        s.innerHTML = "Something went wrong", alert(n)
+    }
+};
+c.addEventListener("submit", u);
+c.addEventListener("keyup", t => {
+    t.keyCode === 13 && u(t)
+});
+    </script>
+    <style>
+       @import"https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Alegreya Sans, sans-serif
+}
+
+body {
+    background: azure;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+    flex-direction: column;
+    flex-wrap: wrap
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: inherit;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px
+}
+
+.header p {
+    color: #333;
+    font-family: monospace;
+    font-size: 20px
+}
+
+#app {
+    width: 80%;
+    height: 100vh;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px #00000080;
+    -webkit-transition: all .6s cubic-bezier(.165, .84, .44, 1);
+    transition: all .6s cubic-bezier(.165, .84, .44, 1)
+}
+
+
+
+#chat_container {
+  flex: 1;
+  width: 100%;
+  height: 60%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding-bottom: 20px;
+  scroll-behavior: smooth
+}
+
+#chat_container::-webkit-scrollbar {
+    display: none
+}
+
+form {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  align-items: center;
+}
+
+textarea {
+  width: 70%;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+button img {
+width: 20px;
+height: 20px;
+}
+.wrapper {
+    width: 100%;
+    padding: 15px
+}
+
+.ai {
+    background: #40414F
+}
+
+.chat {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px
+}
+
+.profile {
+    width: 36px;
+    height: 36px;
+    border-radius: 5px;
+    background: #5436DA;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.ai .profile {
+    background: #10a37f
+}
+
+.profile img {
+    width: 60%;
+    height: 60%;
+    object-fit: contain
+}
+
+.message {
+    flex: 1;
+    font-size: 20px;
+    max-width: 100%;
+    overflow-x: scroll;
+    white-space: pre-wrap;
+    -ms-overflow-style: none;
+    scrollbar-width: none
+}
+
+.user {
+    color: #333
+}
+
+.bot {
+    color: #fff
+}
+
+.message::-webkit-scrollbar {
+    display: none
+}
+
+.container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -28,34 +292,89 @@
     @media only screen and (max-width: 600px) {
       .container {
         width: 100%;
+        justify-content: center;
       }
 
       .box {
-        width: 100%;
-        margin: 10px 0;
-        border-radius: 0;
+        width: 90%;
+        margin: 10px auto;
+        border-radius: 10px;
       }
     }
-  </style>
+
+    form {
+  width: 100%;
+  padding: 10px;
+  background-color: #f2f2f2;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+textarea {
+    width: 100%;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    background: transparent;
+    border-radius: 5px;
+    border: none;
+    outline: none
+}
+
+button {
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    background: transparent
+}
+
+form img {
+    width: 30px;
+    height: 30px
+}
+      </style>
+  
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fresh Bot</title>
+
+    <script type="module" crossorigin src="/assets/index-58e96f49.js"></script>
+   
+    <!-- <link rel="stylesheet" href="/assets/index-5599ee81.css"> -->
 </head>
+
 <body>
-  <div class="container">
-    <div class="box">
-      <h3><i class="fas fa-lightbulb"></i> Examples</h3>
-      <p>What is the capital of France?</p>
-      <p>Who won the Nobel Prize for Literature in 2021?</p>
-      <p>What is the latest smartphone from Apple?</p>
+    <div class="container">
+        <div class="box">
+          <h3><i class="fas fa-lightbulb"></i> Examples</h3>
+          <p>What is the capital of France?</p>
+          <p>Who won the Nobel Prize for Literature in 2021?</p>
+          <p>What is the latest smartphone from Apple?</p>
+        </div>
+        <div class="box">
+            <h3><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
+            <p>My training data only goes up to 2021, so I may not have information on recent events.</p>
+            <p>I may struggle to understand context.</p>
+        </div>
+        
+    <div id="app">
+        <div id="chat_container"></div>
+        <form action="">
+            <textarea name="prompt" id="" cols="1" rows="1" placeholder="Ask Fresh Bot..."></textarea>
+            <button type="submit"> <img src="send-f2246764.svg" alt="send"/></button>
+        </form>
     </div>
-    <div class="box">
-        <h3><i class="fas fa-exclamation-triangle"></i> Limitations</h3>
-        <p>My training data only goes up to 2021, so I may not have information on recent events.</p>
-        <p>I may struggle to understand context and may not provide accurate answers for questions that are too vague or open-ended.</p>
-      </div>
-    <div class="box">
-      <h3><i class="fas fa-cog"></i> Capabilities</h3>
-      <p>I can answer a wide range of questions on various topics such as history, science, current events, and more.</p>
-      <p>I can also generate creative writing and perform arithmetic calculations.</p>
-    </div>
-  </div>
+
 </body>
+
+
+<footer style="text-align: center;">
+    &copy; Fresh Teacher Software <script>document.write(new Date().getFullYear())</script> <br>
+    <a href="http://www.freshteacher.software">www.freshteacher.software</a> <br>
+    <a href="tel:0750687790">0750687790</a> / <a href="tel:0786812837">0786812837</a><br><br><br><br><br><br>
+  </footer>
+  
+
 </html>
