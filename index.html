@@ -86,12 +86,12 @@ const u = async t => {
         })
     });
     if (clearInterval(d), s.innerHTML = "", e.ok) {
-        const i = (await e.json()).bot.trim();
-        g(s, i)
-    } else {
-        const n = await e.text();
-        s.innerHTML = "Something went wrong", alert(n)
-    }
+    const i = (await e.json()).bot.trim();
+    g(s, i)
+} else {
+    const n = await e.text();
+    s.innerHTML = "<span style='color:red;'>Something went wrong with the Fresh Bot. Please refresh the page or try again later!</span>", alert(n)
+}
 };
 c.addEventListener("submit", u);
 c.addEventListener("keyup", t => {
@@ -366,7 +366,7 @@ form img {
     <div id="app">
         <div id="chat_container"></div>
         <form action="">
-            <textarea name="prompt" id="" cols="1" rows="1" placeholder="Ask Fresh Bot..."></textarea>
+            <textarea name="prompt" id="" cols="1" rows="1" placeholder="Ask the Fresh Bot..."></textarea>
             <button type="submit"> <img src="send-f2246764.svg" alt="send"/></button>
         </form>
     </div>
