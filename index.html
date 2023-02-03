@@ -113,16 +113,6 @@ textArea.addEventListener('focus', function() {
     box.style.display = 'none';
   });
 });
-
-const exampleQuestions = document.querySelectorAll('.container .box p');
-const textBox = document.getElementById('text-box');
-
-exampleQuestions.forEach(question => {
-  question.addEventListener('click', e => {
-    textBox.value = e.target.textContent;
-  });
-});
-
     </script>
     <style>
        @import"https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap";
@@ -384,7 +374,7 @@ form img {
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fresh Bot</title>
+    <title>Fresh Teacher's Robot</title>
 
     <script type="module" crossorigin src="/assets/index-58e96f49.js"></script>
    
@@ -393,21 +383,23 @@ form img {
 
 <body>
     <header class="header">
-        <h1 class="header-title">Fresh Bot</h1>
+        <h1 class="header-title">Fresh Bot 🤖</h1>
       </header>
       
     <div class="container">
         <div class="box">
-          <h3><i class="fas fa-lightbulb"></i> Example  Questions</h3>
-          <p style="text-align: left;">Compose a three-stanza poem about a wise pupil called Jesse.</p><br>
-          <p style="text-align: left;">Explain Gravity in a simplified way with examples.</p><br>
-          <p style="text-align: left;">Use BODMAS to solve 45 + 34 ÷ 2 × 82 ÷ 16</p><br>
-          <p style="text-align: left;">Write the equation when Carbon reacts with Hydrogen.</p><br>
+          <h3><i class="fas fa-lightbulb"></i> Recent Searches 🔍</h3>
+          <p style="text-align: left;">Compose a poem about Masaka Secondary School with three stanzas and rhyming words at the end of each line.</p><br>
+          <p style="text-align: left;">Explain the term Gravity in a simplified way that even a nursery pupil can understand.</p><br>
+          <p style="text-align: left;">Use BODMAS to solve 45 + 34 ÷ 2 × 82 - 16 and show your working then explain your answer.</p><br>
+          <p style="text-align: left;">Write and describe a chemical equation for dissolution of Ammonium Methanoate in water.</p><br>
+            <p style="text-align: left;">Discuss the reasons for the collapse of the Chwezi Dynasty.</p><br>
+<p style="text-align: left;"> Write an HTML code for a school website and style it with CSS then include JavaScript functionality.</p><br>
         </div>
         <div class="box">
-          <h3><i class="fas fa-exclamation-triangle"></i> Abilities & Limitations</h3>
-          <p style="text-align: left;">The Fresh Bot can answer all questions but its knowledge is cut off from events beyond 2021.</p><br>
-          <p style="text-align: left;">The Fresh Bot may give incorrect answers to vague questions which not clear so be descriptive. </p><br>
+          <h3><i class="fas fa-exclamation-triangle"></i> Abilities & Limitations ⚡ </h3>
+          <p style="text-align: left;">The Fresh Bot was trained on a wide range of topics BUT it has limited knowledge about events beyond 2020.</p><br>
+          <p style="text-align: left;">The Fresh Bot can answer all questions BUT it may give incorrect answers to vague queries which are ambiguous. </p><br>
           <p style="text-align: left;">The Fresh Bot has no feelings and emotions so use it for getting advice BUT not in decision making.  </p><br>
         </div>
       </div>
