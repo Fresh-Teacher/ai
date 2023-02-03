@@ -113,6 +113,18 @@ textArea.addEventListener('focus', function() {
     box.style.display = 'none';
   });
 });
+const link = document.getElementById("link");
+
+link.addEventListener("click", function() {
+  link.classList.toggle("clicked");
+});
+
+document.querySelectorAll('a').forEach(link => {
+link.addEventListener('click', e => {
+e.target.style.color = 'red';
+});
+});
+
     </script>
     <style>
        @import"https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap";
