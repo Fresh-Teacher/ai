@@ -450,7 +450,6 @@ form img {
 
 </html>
  --> 
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -463,9 +462,12 @@ form img {
         align-items: center;
         justify-content: center;
         height: 300px;
+        padding: 50px;
+        box-sizing: border-box;
+        margin-bottom: -150px;
       }
       .header img {
-        width: 80%;
+        width: 100%;
         height: auto;
       }
       .container {
@@ -475,6 +477,7 @@ form img {
         justify-content: center;
         height: 100vh;
         text-align: center;
+        padding-top: 150px;
       }
       h1 {
         font-size: 36px;
@@ -484,9 +487,37 @@ form img {
         font-size: 18px;
         margin-bottom: 20px;
       }
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .navbar h2 {
+        margin: 0;
+        font-size: 24px;
+      }
+      @media (min-width: 992px) {
+        .header {
+          height: 350px;
+          margin-bottom: -175px;
+        }
+        .container {
+          padding-top: 175px;
+        }
+      }
     </style>
-  </head><br>
+  </head>
   <body>
+    <div class="navbar">
+      <h2>Fresh Bot</h2>
+    </div>
     <div class="header">
       <img src="bot.png" alt="Engineers fixing website">
     </div>
