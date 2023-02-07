@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -125,6 +125,11 @@ e.target.style.color = 'red';
 });
 });
 
+window.onload = function() {
+  document.querySelector('.overlay').style.display = 'flex';
+}
+
+
     </script>
     <style>
        @import"https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@100;300;400;500;700;800;900&display=swap";
@@ -238,6 +243,40 @@ button img {
 width: 20px;
 height: 20px;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 18px;
+  text-decoration: none;
+  color: white;
+  background-color: blue;
+}
+
+
 .wrapper {
     width: 100%;
     padding: 15px
@@ -404,12 +443,20 @@ form img {
     <script type="module" crossorigin src="/assets/index-58e96f49.js"></script>
    
     <!-- <link rel="stylesheet" href="/assets/index-5599ee81.css"> -->
-<!-- </head>
+ </head>
 
 <body>
     <header class="header">
         <h1 class="header-title">Fresh Bot 🤖</h1>
       </header>
+      <div class="overlay">
+        <div class="popup" >
+          <h2>WARNING!</h2>
+          <p style="text-align: left;">The Fresh Bot is currently experiencing a high volume of requests.<br><br> Please try again later or use another Chat Bot to serve you now.</p>
+          <br><a href="https://chat.openai.com/auth/login" class="btn btn-primary">Use Another Chat Bot 🤖</a>
+        </div>
+      </div>
+      
       
     <div class="container">
         <div class="box">
@@ -449,8 +496,8 @@ form img {
   
 
 </html>
- --> 
-<!DOCTYPE html>
+
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
@@ -527,4 +574,4 @@ form img {
       <p>We apologize for any inconvenience this may cause.  🙏</p>
     </div>
   </body>
-</html>
+</html> -->
